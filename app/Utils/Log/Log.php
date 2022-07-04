@@ -13,9 +13,9 @@ use Hyperf\Utils\ApplicationContext;
 
 class Log
 {
-    public static function get(string $name = 'default'): \Psr\Log\LoggerInterface
+    public static function get(string $name = 'default', string $group = 'default'): \Psr\Log\LoggerInterface
     {
-        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($name);
+        return ApplicationContext::getContainer()->get(LoggerFactory::class)->get($name,$group);
     }
 
 }

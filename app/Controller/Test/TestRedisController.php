@@ -9,6 +9,7 @@
 namespace App\Controller\Test;
 
 use App\Controller\AbstractController;
+use App\Service\TestTableService;
 use App\Utils\Redis\RedisPersist;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Psr\SimpleCache\CacheInterface;
@@ -38,6 +39,22 @@ class TestRedisController extends AbstractController
 
         return $this->response->json($data);
 
+    }
+
+    /**
+     * 测试普通缓存-缓存mysql table数据
+     */
+    public function test_redis_cache_mysqlTable(){
+        $funcName = 'test_redis_cache_mysqlTable';
+        //缓存
+        $ret = make(TestTableService::class)->testTable();
+        $data = [
+            'code' => 1,
+            'funcName' => $funcName,
+            'path' => $this->request->getPathInfo(),
+            'cache_mysqlTable_ret' => $ret,
+        ];
+        return $this->response->json($data);
     }
 
     /**

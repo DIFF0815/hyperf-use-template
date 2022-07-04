@@ -13,8 +13,13 @@ use Psr\Log\LogLevel;
 
 class LogService
 {
-    public static function record($message,$context){
-        Log::get('default')->log(LogLevel::INFO,$message,$context);
+    //普通日志记录
+    public static function info($message,$context){
+        Log::get()->log(LogLevel::INFO,$message,$context);
     }
 
+    //异常日志记录
+    public static function exception($message,$context){
+        Log::get('default','exception')->log(LogLevel::ERROR,$message,$context);
+    }
 }

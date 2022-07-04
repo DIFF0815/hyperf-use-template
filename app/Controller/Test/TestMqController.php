@@ -20,6 +20,7 @@ use Hyperf\Utils\ApplicationContext;
 class TestMqController extends AbstractController
 {
 
+    //测试发生mq数据
     public function test_mq_send_data(){
         $data = [
             'code' => 1,
@@ -28,10 +29,18 @@ class TestMqController extends AbstractController
         ];
 
         //第一种方式
-        $message = new DemoProducer($data);
+        /*$message = new DemoProducer($data);
         $producer = ApplicationContext::getContainer()->get(Producer::class);
         $result = $producer->produce($message);
+        $data['result'] = $result;*/
+
+        //第二种方式
+        $message = new DemoProducer($data);
+        $producer = $this->container->get(Producer::class);
+        $result = $producer->produce($message);
         $data['result'] = $result;
+
+
 
         return $this->response->json($data);
 

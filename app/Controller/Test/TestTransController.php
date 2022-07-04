@@ -31,7 +31,7 @@ class TestTransController extends AbstractController
     }
 
     //测试国际化翻译和枚举错误结合
-    public function test_trans1(){
+    public function test_trans2(){
 
         $data = [
             'code' => 1,

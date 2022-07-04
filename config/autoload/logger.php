@@ -49,6 +49,25 @@ return [
             ]
         ],
     ],
+    'exception' => [
+        'handlers' => [
+            [
+                'class' => Monolog\Handler\RotatingFileHandler::class,
+                'constructor' => [
+                    'filename' => BASE_PATH . '/runtime/logs/hyperf-exception.log',
+                    'level' => Monolog\Logger::INFO,
+                ],
+                'formatter' => [
+                    'class' => Monolog\Formatter\JsonFormatter::class,
+                    'constructor' => [
+                        'format' => null,
+                        'dateFormat' => null,
+                        'allowInlineLineBreaks' => true,
+                    ],
+                ],
+            ]
+        ],
+    ],
     'sql' => [
         'handlers' => [
             [
@@ -74,7 +93,7 @@ return [
                 'class' => Monolog\Handler\RotatingFileHandler::class,
                 'constructor' => [
                     'filename' => BASE_PATH . '/runtime/logs/hyperf-stdout.log',
-                    'level' => Monolog\Logger::DEBUG,
+                    'level' => env('APP_ENV') === 'prod' ? Monolog\Logger::WARNING : Monolog\Logger::DEBUG,
                 ],
                 'formatter' => [
                     'class' => Monolog\Formatter\JsonFormatter::class,
