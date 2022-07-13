@@ -61,4 +61,17 @@ class TestLogController extends AbstractController
 
 
     }
+
+    //记录自定义日志文件名
+    public function test_custom_log(){
+
+        $data = [
+            'code' => 1,
+            'msg' => 'test_custom_log 记录成功',
+        ];
+        //Functions.php  文件里面定义的 logCustom 方法名称
+        logCustom($data,'自定义日志文件名称');
+        return $this->response->json($data);
+
+    }
 }
